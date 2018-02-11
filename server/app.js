@@ -5,9 +5,12 @@ import * as db from './utils/databaseUtils';
 import { dirname } from 'path';
 import path from "path";
 
+import cors from 'cors';
+
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 // app.use(bodyParser.urlencoded({extended: true}));
 
 // app.get('/', (req, res) => {

@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack",
-    "server": "webpack-dev-server --content-base ./public --inline --hot"
+    "start": "BABEL_ENV=react webpack",
+    "server": "BABEL_ENV=react webpack-dev-server --content-base ./public --inline --hot --port 8081",
+    "server-app": "babel-node server/app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "mongodb": "^3.0.2",
     "react": "^16.2.0",

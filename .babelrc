@@ -1,3 +1,22 @@
+// {
+// 	"presets": [
+// 		"react",
+// 		"env"
+// 	]
+// }
+
+
+// {
+// 	"presets": [
+// 		"react",
+// 		"env"
+// 	]
+// }
+
 {
-    "presets": ["react", "env"]
+	"env": {
+	  "react": {
+		"presets": ["react", "env"]
+	  }
+	}
   }
