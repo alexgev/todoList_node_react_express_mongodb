@@ -2,39 +2,198 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
-class Form extends React.Component {
+const scaleNames = {
+	c: "Celsius",
+	f: "Fahrenheit"
+}
+
+function toCelsius(fahrenheit) {
+	return (fahrenheit - 32) * 5 / 9;
+}
+
+function toFahrenheit(celsius) {
+	return (celsius * 9 / 5) + 32;
+}
+
+function tryConvert(value, convert) {
+	const input = parseFloat(value);
+	if (Number.isNaN(input)) {
+		return '';
+	}
+	const output = convert(input);
+	const rounded = Math.round(output * 1000) / 1000;
+	return rounded.toString();
+}
+
+function BoilingVerdict(props) {
+	return (
+		<p>
+			{
+				+props.celsius >= 100 ? "yes" : "no"
+			}
+		</p>
+	)
+} 
+
+class TemperatureInput extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {value: ''}
-		this.handleOnChange = this.handleOnChange.bind(this);
-		this.handleOnClick = this.handleOnClick.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleOnChange(event) {
-		this.setState({
-			value: event.target.value
-		})
+	handleChange(e) {
+		this.props.onChange(e.target.value);
 	}
-
-	handleOnClick(event) {
-		alert(`Text field value is ${this.state.value}`);
-	}
-
 
 	render() {
+		const value = this.props.value;
+		const scale = this.props.scale;
 		return (
-			<form>
-				<input placeholder="Hello!" value={this.state.value} onChange={this.handleOnChange} />
-				<button onClick={this.handleOnClick}>Submit</button>
-			</form>
-		)
+			<fieldset>
+				<legend>Enter temperature in {scaleNames[scale]}:</legend>
+				<input value={value}
+					onChange={this.handleChange} />
+			</fieldset>
+		);
 	}
 }
 
+class Calculator extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
+		this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+		this.state = { value: '', scale: 'c' };
+	}
+
+	handleCelsiusChange(value) {
+		this.setState({ scale: 'c', value });
+	}
+
+	handleFahrenheitChange(value) {
+		this.setState({ scale: 'f', value });
+	}
+
+	render() {
+		const scale = this.state.scale;
+		const value = this.state.value;
+		const celsius = scale === 'f' ? tryConvert(value, toCelsius) : value;
+		const fahrenheit = scale === 'c' ? tryConvert(value, toFahrenheit) : value;
+
+		return (
+			<div>
+				<TemperatureInput
+					scale="c"
+					value={celsius}
+					onChange={this.handleCelsiusChange} />
+				<TemperatureInput
+					scale="f"
+					value={fahrenheit}
+					onChange={this.handleFahrenheitChange} />
+				<BoilingVerdict
+					celsius={celsius} />
+			</div>
+		);
+	}
+}
+
+
 ReactDOM.render(
-	<Form />,
+	<Calculator />,
 	document.getElementById('app')
 )
+
+
+
+
+
+
+
+
+
+// function BoilingVerdict(props) {
+// 	return (
+// 		<p>
+// 			{
+// 				+props.celsius >= 100 ? "yes" : "no"
+// 			}
+// 		</p>
+// 	)
+// } 
+
+// class Calculator extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {value: ''};
+// 		this.handleOnChange = this.handleOnChange.bind(this);
+// 	}
+
+// 	handleOnChange(e) {
+// 		this.setState({value: e.target.value})
+// 	}
+
+// 	render() {
+// 		const value = this.state.value;
+// 		return (
+// 			<fieldset>
+// 				<legend>Enter tempreture in Celsius:</legend>
+// 				<input value={this.state.value} onChange={this.handleOnChange}/>
+// 				<BoilingVerdict celsius={value}/>
+// 			</fieldset>
+// 		)
+// 	}
+// }
+
+// ReactDOM.render(
+// 	<Calculator />,
+// 	document.getElementById('app')
+// )
+
+
+
+
+
+
+
+
+
+
+
+
+
+// class Form extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {value: ''}
+// 		this.handleOnChange = this.handleOnChange.bind(this);
+// 		this.handleOnClick = this.handleOnClick.bind(this);
+// 	}
+
+// 	handleOnChange(event) {
+// 		this.setState({
+// 			value: event.target.value
+// 		})
+// 	}
+
+// 	handleOnClick(event) {
+// 		alert(`Text field value is ${this.state.value}`);
+// 	}
+
+
+// 	render() {
+// 		return (
+// 			<form>
+// 				<input placeholder="Hello!" value={this.state.value} onChange={this.handleOnChange} />
+// 				<button onClick={this.handleOnClick}>Submit</button>
+// 			</form>
+// 		)
+// 	}
+// }
+
+// ReactDOM.render(
+// 	<Form />,
+// 	document.getElementById('app')
+// )
 
 
 
