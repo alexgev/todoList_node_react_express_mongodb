@@ -2,48 +2,251 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
-
-function Warning(props) {
-	if (!props.warn) {
-		return null;
-	}
-
-	return (
-		<div>
-			Warning Message!
-        </div>
-	)
-}
-
-class Page extends React.Component {
+class Form extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { warn: false };
-		this.handleToggleClick = this.handleToggleClick.bind(this);
+		this.state = {value: ''}
+		this.handleOnChange = this.handleOnChange.bind(this);
+		this.handleOnClick = this.handleOnClick.bind(this);
 	}
 
-	handleToggleClick() {
-		this.setState(prevState => {
-			return { warn: !prevState.warn };
-		});
+	handleOnChange(event) {
+		this.setState({
+			value: event.target.value
+		})
 	}
+
+	handleOnClick(event) {
+		alert(`Text field value is ${this.state.value}`);
+	}
+
 
 	render() {
 		return (
-			<div>
-				<Warning warn={this.state.warn} />
-				<button onClick={this.handleToggleClick}>
-					{this.state.warn ? 'Hide' : 'Show'}
-				</button>
-			</div>
+			<form>
+				<input placeholder="Hello!" value={this.state.value} onChange={this.handleOnChange} />
+				<button onClick={this.handleOnClick}>Submit</button>
+			</form>
 		)
 	}
 }
 
 ReactDOM.render(
-	<Page />,
-	document.getElementById("app")
+	<Form />,
+	document.getElementById('app')
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ReactDOM.render(
+// 	<input type="text" value="hello!"/>,
+// 	document.getElementById('app')
+// )
+
+
+
+
+
+
+
+
+
+
+
+// function NumberList(props) {
+// 	const numbers = props.numbers;
+// 	return (
+// 		<ul>
+// 			{
+// 				numbers.map((val) => {
+// 					return <li key={val}>{val}</li>
+// 				})
+// 			}
+// 		</ul>
+// 	)
+// }
+
+// const numbers = [1,2,3,4,5];
+
+// ReactDOM.render(
+// 	<NumberList numbers={numbers}/>,
+// 	document.getElementById('app')
+// )
+
+
+
+
+
+
+
+
+
+
+// function Blog(props) {
+// 	const sidebar = props.posts.map((post) => {
+// 		return <li key={post.id}>{post.title}</li>
+// 	})
+
+// 	const content = props.posts.map((post) => {
+// 		return (
+// 			<div key={post.id}>
+// 				<h3>{post.title}</h3>
+// 				<p>{post.content}</p>
+// 			</div>
+// 		)
+// 	})
+
+// 	return (
+// 		<div>
+// 			<ul>
+// 				{sidebar}
+// 			</ul>
+// 			<hr />
+// 			<ul>
+// 				{content}
+// 			</ul>
+// 		</div>
+// 	)
+// }
+
+
+// const posts = [
+// 	{id: 1, title: "Hello world", content: "Start learning React js"},
+// 	{id: 2, title: "Installation", content: "You can install react from npm"}
+// ]
+
+// ReactDOM.render(
+// 	<Blog posts={posts} />,
+// 	document.getElementById('app')
+// )
+
+
+
+
+
+
+
+
+
+
+
+// function ListItem(props) {
+// 	const liElem = props.number;
+// 	return (<li>{props.number}</li>)
+// }
+
+// function NumberList(props) {
+// 	const arr = props.numbers;
+// 	const li = arr.map((val) => {
+// 		return <ListItem number={val} key={val}/>
+// 	})
+// 	return (
+// 		<ul>
+// 			{li}
+// 		</ul>
+// 	)
+// }
+
+// const arr = [1,2,3,4,5];
+
+// ReactDOM.render(
+// 	<NumberList numbers={arr} />,
+// 	document.getElementById('app')
+// )
+
+
+
+
+
+
+
+
+
+// function ListItems(props) {
+// 	const arr = props.number;
+// 	const li = arr.map((val) => {
+// 		return <li key={val.toString()}>{val}</li>
+// 	})
+// 	return <ul>{li}</ul>;
+// }
+
+// const numbers = [1,2,3,4,5];
+
+// ReactDOM.render(
+// 	<ListItems number={numbers}/>,
+// 	document.getElementById('app')
+// )
+
+
+
+// const arr = [1,2,3,4,5];
+// const numbersLi = arr.map((number) => {
+// 	return <li>{number}</li>
+// })
+
+// ReactDOM.render(
+// 	<ul>{numbersLi}</ul>,
+// 	document.getElementById('app')
+// )
+
+
+
+
+
+
+// function Warning(props) {
+// 	if (!props.warn) {
+// 		return null;
+// 	}
+
+// 	return (
+// 		<div>
+// 			Warning Message!
+//         </div>
+// 	)
+// }
+
+// class Page extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = { warn: false };
+// 		this.handleToggleClick = this.handleToggleClick.bind(this);
+// 	}
+
+// 	handleToggleClick() {
+// 		this.setState(prevState => {
+// 			return { warn: !prevState.warn };
+// 		});
+// 	}
+
+// 	render() {
+// 		return (
+// 			<div>
+// 				<Warning warn={this.state.warn} />
+// 				<button onClick={this.handleToggleClick}>
+// 					{this.state.warn ? 'Hide' : 'Show'}
+// 				</button>
+// 			</div>
+// 		)
+// 	}
+// }
+
+// ReactDOM.render(
+// 	<Page />,
+// 	document.getElementById("app")
+// )
 
 
 
