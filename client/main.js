@@ -2,127 +2,196 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
-const scaleNames = {
-	c: "Celsius",
-	f: "Fahrenheit"
-}
-
-function toCelsius(fahrenheit) {
-	return (fahrenheit - 32) * 5 / 9;
-}
-
-function toFahrenheit(celsius) {
-	return (celsius * 9 / 5) + 32;
-}
-
-function tryConvert(value, convert) {
-	const input = parseFloat(value);
-	if (Number.isNaN(input)) {
-		return '';
-	}
-	const output = convert(input);
-	const rounded = Math.round(output * 1000) / 1000;
-	return rounded.toString();
-}
-
-function BoilingVerdict(props) {
-	return (
-		<p>
-			{
-				+props.celsius >= 100 ? "yes" : "no"
-			}
-		</p>
-	)
-} 
-
-class TemperatureInput extends React.Component {
+class ToDoList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.handleChange = this.handleChange.bind(this);
+		this.state = {todos: []};
 	}
 
-	handleChange(e) {
-		this.props.onChange(e.target.value);
-	}
-
-	render() {
-		const value = this.props.value;
-		const scale = this.props.scale;
-		return (
-			<fieldset>
-				<legend>Enter temperature in {scaleNames[scale]}:</legend>
-				<input value={value}
-					onChange={this.handleChange} />
-			</fieldset>
-		);
-	}
-}
-
-class Calculator extends React.Component {
-	constructor(props) {
-		super(props);
-		this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
-		this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
-		this.state = { value: '', scale: 'c' };
-	}
-
-	componentDidMount() {
+	componentWillMount() {
+		let todos = [];
+		let saveThis = this;
 		// 1. Создаём новый объект XMLHttpRequest
 		var xhr = new XMLHttpRequest();
 
 		// 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-		xhr.open('GET', 'http://localhost:8080/tasks', false);
+		xhr.open('GET', 'http://localhost:8080/tasks');
 
 		// 3. Отсылаем запрос
 		xhr.send();
 
-		// 4. Если код ответа сервера не 200, то это ошибка
-		if (xhr.status != 200) {
-		// обработать ошибку
-		console.log( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
-		} else {
-		// вывести результат
-		console.log(JSON.parse(xhr.responseText)); // responseText -- текст ответа.
+		xhr.onload = function() {
+			// 4. Если код ответа сервера не 200, то это ошибка
+			if (this.status != 200) {
+				// обработать ошибку
+				console.log(this.status + ': ' + this.statusText); // пример вывода: 404: Not Found
+			} else {
+				// вывести результат
+				todos = JSON.parse(this.responseText);
+				saveThis.setState({todos: todos});
+				console.log(JSON.parse(this.responseText)); // responseText -- текст ответа.
+			}
 		}
-	}
-
-	handleCelsiusChange(value) {
-		this.setState({ scale: 'c', value });
-	}
-
-	handleFahrenheitChange(value) {
-		this.setState({ scale: 'f', value });
+		
+		
 	}
 
 	render() {
-		const scale = this.state.scale;
-		const value = this.state.value;
-		const celsius = scale === 'f' ? tryConvert(value, toCelsius) : value;
-		const fahrenheit = scale === 'c' ? tryConvert(value, toFahrenheit) : value;
-
 		return (
-			<div>
-				<TemperatureInput
-					scale="c"
-					value={celsius}
-					onChange={this.handleCelsiusChange} />
-				<TemperatureInput
-					scale="f"
-					value={fahrenheit}
-					onChange={this.handleFahrenheitChange} />
-				<BoilingVerdict
-					celsius={celsius} />
-			</div>
-		);
+			<ul>
+				{
+					this.state.todos.map((todo) => {
+						return (
+							<div key={todo._id}>
+								<li>{`${todo.name} : ${todo.value}`}</li>
+								<hr />
+							</div>
+						)
+					})
+				}
+			</ul>
+		)
 	}
 }
 
-
-
 ReactDOM.render(
-	<Calculator />,
+	<ToDoList />,
 	document.getElementById('app')
 )
+
+
+
+
+
+
+
+
+
+
+// const scaleNames = {
+// 	c: "Celsius",
+// 	f: "Fahrenheit"
+// }
+
+// function toCelsius(fahrenheit) {
+// 	return (fahrenheit - 32) * 5 / 9;
+// }
+
+// function toFahrenheit(celsius) {
+// 	return (celsius * 9 / 5) + 32;
+// }
+
+// function tryConvert(value, convert) {
+// 	const input = parseFloat(value);
+// 	if (Number.isNaN(input)) {
+// 		return '';
+// 	}
+// 	const output = convert(input);
+// 	const rounded = Math.round(output * 1000) / 1000;
+// 	return rounded.toString();
+// }
+
+// function BoilingVerdict(props) {
+// 	return (
+// 		<p>
+// 			{
+// 				+props.celsius >= 100 ? "yes" : "no"
+// 			}
+// 		</p>
+// 	)
+// }
+
+// class TemperatureInput extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.handleChange = this.handleChange.bind(this);
+// 	}
+
+// 	handleChange(e) {
+// 		this.props.onChange(e.target.value);
+// 	}
+
+// 	render() {
+// 		const value = this.props.value;
+// 		const scale = this.props.scale;
+// 		return (
+// 			<fieldset>
+// 				<legend>Enter temperature in {scaleNames[scale]}:</legend>
+// 				<input value={value}
+// 					onChange={this.handleChange} />
+// 			</fieldset>
+// 		);
+// 	}
+// }
+
+// class Calculator extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
+// 		this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+// 		this.state = { value: '', scale: 'c' };
+// 	}
+
+// 	componentDidMount() {
+// 		// 1. Создаём новый объект XMLHttpRequest
+// 		var xhr = new XMLHttpRequest();
+
+// 		// 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+// 		xhr.open('GET', 'http://localhost:8080/tasks');
+
+// 		// 3. Отсылаем запрос
+// 		xhr.send();
+
+// 		xhr.onload = function() {
+// 			// 4. Если код ответа сервера не 200, то это ошибка
+// 			if (this.status != 200) {
+// 				// обработать ошибку
+// 				console.log(this.status + ': ' + this.statusText); // пример вывода: 404: Not Found
+// 			} else {
+// 				// вывести результат
+// 				console.log(JSON.parse(this.responseText)); // responseText -- текст ответа.
+// 			}
+// 		}
+
+// 	}
+
+// 	handleCelsiusChange(value) {
+// 		this.setState({ scale: 'c', value });
+// 	}
+
+// 	handleFahrenheitChange(value) {
+// 		this.setState({ scale: 'f', value });
+// 	}
+
+// 	render() {
+// 		const scale = this.state.scale;
+// 		const value = this.state.value;
+// 		const celsius = scale === 'f' ? tryConvert(value, toCelsius) : value;
+// 		const fahrenheit = scale === 'c' ? tryConvert(value, toFahrenheit) : value;
+
+// 		return (
+// 			<div>
+// 				<TemperatureInput
+// 					scale="c"
+// 					value={celsius}
+// 					onChange={this.handleCelsiusChange} />
+// 				<TemperatureInput
+// 					scale="f"
+// 					value={fahrenheit}
+// 					onChange={this.handleFahrenheitChange} />
+// 				<BoilingVerdict
+// 					celsius={celsius} />
+// 			</div>
+// 		);
+// 	}
+// }
+
+
+
+// ReactDOM.render(
+// 	<Calculator />,
+// 	document.getElementById('app')
+// )
 
 
 
