@@ -4,6 +4,11 @@
     </head>
     <body>
         <div id="app"></div>
+        <form onclick="event.preventDefault()">
+            <input type="text" class="trackInput">
+            <button type="submit" class="addTrack">Add track</button> 
+        </form>
+        <ul class="list"></ul>
         <script src="bundle.js"></script>
     </body>
 </html>

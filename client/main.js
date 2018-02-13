@@ -1,63 +1,114 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import { createStore } from 'redux';
 
 
-class ToDoList extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {todos: []};
-	}
+// function playlist(state = [], action) {
+// 	if (action.type === "ADD_TRACK") {
+// 		return [
+// 			...state,
+// 			action.payload
+// 		]
+// 	}
+// 	return state;
+// }
 
-	componentWillMount() {
-		let todos = [];
-		let saveThis = this;
-		// 1. Создаём новый объект XMLHttpRequest
-		var xhr = new XMLHttpRequest();
 
-		// 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-		xhr.open('GET', 'http://localhost:8080/tasks');
+// const store = createStore(playlist);
+// const list = document.querySelector('.list');
+// const trackInput = document.querySelector('.trackInput');
 
-		// 3. Отсылаем запрос
-		xhr.send();
+// store.subscribe(() => {
+// 	list.innerHTML = "";
+// 	trackInput.value = "";
+// 	store.getState().forEach((track) => {
+// 		const li = document.createElement('li');
+// 		li.textContent = track;
+// 		list.appendChild(li);
+// 	})
+// })
 
-		xhr.onload = function() {
-			// 4. Если код ответа сервера не 200, то это ошибка
-			if (this.status != 200) {
-				// обработать ошибку
-				console.log(this.status + ': ' + this.statusText); // пример вывода: 404: Not Found
-			} else {
-				// вывести результат
-				todos = JSON.parse(this.responseText);
-				saveThis.setState({todos: todos});
-				console.log(JSON.parse(this.responseText)); // responseText -- текст ответа.
-			}
-		}
-		
-		
-	}
 
-	render() {
-		return (
-			<ul>
-				{
-					this.state.todos.map((todo) => {
-						return (
-							<div key={todo._id}>
-								<li>{`${todo.name} : ${todo.value}`}</li>
-								<hr />
-							</div>
-						)
-					})
-				}
-			</ul>
-		)
-	}
-}
+// const addTrackBtn = document.querySelector('.addTrack');
+// addTrackBtn.addEventListener('click', (e) => {
+// 	const trackName = trackInput.value;
+// 	store.dispatch({type: 'ADD_TRACK', payload: trackName});
+// })
 
-ReactDOM.render(
-	<ToDoList />,
-	document.getElementById('app')
-)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+
+
+// class ToDoList extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {todos: []};
+// 	}
+
+// 	componentWillMount() {
+// 		let todos = [];
+// 		let saveThis = this;
+// 		// 1. Создаём новый объект XMLHttpRequest
+// 		var xhr = new XMLHttpRequest();
+
+// 		// 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+// 		xhr.open('GET', 'http://localhost:8080/tasks');
+
+// 		// 3. Отсылаем запрос
+// 		xhr.send();
+
+// 		xhr.onload = function() {
+// 			// 4. Если код ответа сервера не 200, то это ошибка
+// 			if (this.status != 200) {
+// 				// обработать ошибку
+// 				console.log(this.status + ': ' + this.statusText); // пример вывода: 404: Not Found
+// 			} else {
+// 				// вывести результат
+// 				todos = JSON.parse(this.responseText);
+// 				saveThis.setState({todos: todos});
+// 				console.log(JSON.parse(this.responseText)); // responseText -- текст ответа.
+// 			}
+// 		}
+
+
+// 	}
+
+// 	render() {
+// 		return (
+// 			<ul>
+// 				{
+// 					this.state.todos.map((todo) => {
+// 						return (
+// 							<div key={todo._id}>
+// 								<li>{`${todo.name} : ${todo.value}`}</li>
+// 								<hr />
+// 							</div>
+// 						)
+// 					})
+// 				}
+// 			</ul>
+// 		)
+// 	}
+// }
+
+// ReactDOM.render(
+// 	<ToDoList />,
+// 	document.getElementById('app')
+// )
 
 
 
