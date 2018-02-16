@@ -20,7 +20,7 @@ class App extends Component {
         return (
             <div>
                 <div>
-                    <input type="text" placeholder="Add track" ref={(input) => {this.trackInput = input}}/>
+                    <input type="text" placeholder="Add track" ref={(input) => {this.trackInput = input}}/> 
                     <button onClick={this.addTrack.bind(this)}>Add track</button> 
                 </div>
                 <div>
