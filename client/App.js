@@ -21,7 +21,7 @@ class App extends Component {
             <div>
                 <div>
                     <input type="text" placeholder="Add track" ref={(input) => {this.trackInput = input}}/> 
-                    <button onClick={this.addTrack.bind(this)}>Add track</button> 
+                    <button onClick={this.addTrack.bind(this)}>Add track</button>  
                 </div>
                 <div>
                     <input onChange={this.findTrack.bind(this)} type="text" placeholder="Search track" ref={(input) => {this.searchInput = input}}/>
