@@ -11,7 +11,7 @@ class App extends Component {
     }
 
     findTrack() {
-        console.log("findTrack", this.searchInput.value);
+        console.log("findTrack", this.searchInput.value); 
         this.props.onFindTrack(this.searchInput.value);
     }
 
