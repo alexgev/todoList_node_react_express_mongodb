@@ -1,4 +1,8 @@
 const initialState = [
+    {
+        id: 1234,
+        name: "My track"
+    }
 ]
 
 export default function tracks(state = initialState, action) {
