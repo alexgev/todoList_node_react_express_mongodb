@@ -1,20 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { Router, Route, hashHistory } from 'react-router';
 
 import App from './App';
+import About from './About';
 
 import reducer from './reducers';
 
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); 
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
-	</Provider>,
+		<Router history={hashHistory}>
+			<Route path="/" component={App} />
+			<Route path="/about" component={About} />
+		</Router>
+	</Provider >,
 	document.getElementById('app')
 )
 
