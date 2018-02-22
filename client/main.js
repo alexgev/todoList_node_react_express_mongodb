@@ -12,7 +12,7 @@ import {getTasks, addTask} from './actions/tasks';
 const store = createStore((state = [], action) => {
     if (action.type === "ADD_TASK") {
         console.log(action.payload);
-        addTask("http://localhost:8080/tasks", action.payload)
+        addTask(action.payload)
             .then(
                 response => {
                     console.log("response add", response);
@@ -40,7 +40,7 @@ store.subscribe(() => {
     console.log('subscribe', store.getState());
 });
 
-getTasks("http://localhost:8080/tasks").then(
+getTasks().then(
     response => {
         console.log("promise", response);
         response.map((task) => {
