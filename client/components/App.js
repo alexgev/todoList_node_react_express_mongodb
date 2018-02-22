@@ -9,17 +9,19 @@ const App = (props) => {
 
     const handleTaskAdd = (data) => {
         console.log('data', data);
-        props.onAddTask(data);
+        props.onAddTask({title: data});
     }
+
+    let listOfTasks = props.testStore.map((task, index) => {
+        return <li key={index}>{task.title}</li>
+    })
 
     return (
         <div>
             <h2>Todo Application</h2>
             <TaskEditor onTaskAdd={handleTaskAdd}/>
             {
-                props.testStore.reverse().map((task, index) => {
-                    return <li key={index}>{task}</li>
-                })
+                listOfTasks.reverse()
             }
         </div>
     )

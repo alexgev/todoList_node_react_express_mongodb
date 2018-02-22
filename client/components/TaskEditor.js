@@ -17,7 +17,7 @@ const TaskEditor = (props) => {
     return (
         <div>
             <form onSubmit={handleSubmitForm}>
-                <input ref={input => inputAddTask = input} placeholder="Add Task..."/>
+                <input ref={input => inputAddTask = input} placeholder="Title"/>
                 <button onClick={addTask}>Add Task</button>
             </form>
         </div>
