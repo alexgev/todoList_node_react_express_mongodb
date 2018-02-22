@@ -1,0 +1,8 @@
+.app {
+    margin: 0 auto;
+    width: 300px;
+}
+
+.app__title {
+    text-align: center;
+}

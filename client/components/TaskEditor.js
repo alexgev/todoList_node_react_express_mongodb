@@ -1,13 +1,17 @@
 import React from 'react';
 
+import './TaskEditor.css';
+
 const TaskEditor = (props) => {
 
     let inputAddTask = '';
+    let textareaAddTask = '';
 
     const addTask = () => {
         console.dir(inputAddTask.value);
-        props.onTaskAdd(inputAddTask.value);
+        props.onTaskAdd(inputAddTask.value, textareaAddTask.value);
         inputAddTask.value = '';
+        textareaAddTask.value = '';
     }
 
     const handleSubmitForm = (e) => {
@@ -15,11 +19,10 @@ const TaskEditor = (props) => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmitForm}>
-                <input ref={input => inputAddTask = input} placeholder="Title"/>
-                <button onClick={addTask}>Add Task</button>
-            </form>
+        <div className="task-editor">
+            <input ref={input => inputAddTask = input} placeholder="Title" className="task-editor__input"/>
+            <textarea ref={textarea => textareaAddTask = textarea} placeholder="Enter todo text" className="task-editor__text" rows="7"></textarea>
+            <button onClick={addTask} className="task-editor__button">Add Task</button>
         </div>
     )
 }

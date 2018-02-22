@@ -30,7 +30,6 @@ app.get('/tasks', (req, res) => {
 })
 
 app.post('/tasks', (req, res) => {
-    console.log(req.body);
     db.addTask(req.body).then(
         result => res.send(result),
         err => res.send(err)
