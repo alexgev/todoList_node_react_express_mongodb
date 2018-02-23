@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 
 import TaskEditor from './TaskEditor';
-import './App.css';
 
 const App = (props) => {
     console.log('props.testStore', props.testStore);
@@ -14,7 +13,7 @@ const App = (props) => {
     }
 
     let listOfTasks = props.testStore.map((task, index) => {
-        return <li key={index}>{task.title}: {task.text}: {`${task.created.date}.${task.created.month}.${task.created.year} ${task.created.hours}:${task.created.minutes}:${task.created.seconds}`}</li>
+        return <li key={task._id}>{`title: ${task.title} | text: ${task.text} | created: ${task.created.date}.${task.created.month}.${task.created.year} ${task.created.hours}:${task.created.minutes}:${task.created.seconds} | finished ${task.finished.date}.${task.finished.month}.${task.finished.year} ${task.finished.hours}:${task.finished.minutes}`}</li>
     })
 
     return (

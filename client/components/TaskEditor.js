@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './TaskEditor.css';
 
 const TaskEditor = (props) => {
 
@@ -75,12 +74,14 @@ const TaskEditor = (props) => {
             <form onSubmit={handleSubmitForm}>
                 <input ref={input => inputAddTask = input} placeholder="Title" className="task-editor__input" required/>
                 <textarea ref={textarea => textareaAddTask = textarea} placeholder="Enter todo text" className="task-editor__text" rows="7" required></textarea>
-                <input type="date" ref={inputDate => inputDateTask = inputDate} className="task-editor__input-date" required/>
-                <span ref={span => textShowTime = span} className="task-editor__span">show time area:</span>
-                <input type="checkbox" ref={checkbox => checkBoxTime = checkbox} onChange={handleCheckbox} className="task-editor__input-checkbox"/>
-                <input type="text" ref={inputDate => inputHoursTask = inputDate} className="task-editor__input-hours" maxLength="2" pattern="[0,1][0-9]|2[0-3]" placeholder="hour" style={{display: "none"}}/>
-                <input type="text" ref={inputDate => inputMinutesTask = inputDate} className="task-editor__input-minutes" pattern="[0-5][0-9]" placeholder="min" style={{display: "none"}}/>
-                <button onClick={addTask} className="task-editor__button">Add Task</button>
+                <div className="task-editor__footer-inputs-buttons">
+                    <input type="date" ref={inputDate => inputDateTask = inputDate} className="task-editor__input-date" required/>
+                    <span ref={span => textShowTime = span} className="task-editor__span">show time area:</span>
+                    <input type="checkbox" ref={checkbox => checkBoxTime = checkbox} onChange={handleCheckbox} className="task-editor__input-checkbox"/>
+                    <input type="text" ref={inputDate => inputHoursTask = inputDate} className="task-editor__input-hours" maxLength="2" pattern="[0,1][0-9]|2[0-3]" placeholder="hour" style={{display: "none"}}/>
+                    <input type="text" ref={inputDate => inputMinutesTask = inputDate} className="task-editor__input-minutes" pattern="[0-5][0-9]" placeholder="min" style={{display: "none"}}/>
+                    <button onClick={addTask} className="task-editor__button">Add Task</button>
+                </div>
             </form>
         </div>
     )

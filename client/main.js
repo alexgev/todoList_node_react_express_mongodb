@@ -12,18 +12,25 @@ import {getTasks, addTask} from './actions/tasks';
 const store = createStore((state = [], action) => {
     if (action.type === "ADD_TASK") {
         console.log(action.payload);
+        
         addTask(action.payload)
             .then(
                 response => {
                     console.log("response add", response);
+                    const taskFromDbsWithId = response.ops[0];
+                    store.dispatch({type: "IS_LOADED", payload: taskFromDbsWithId});
                 },
                 error => console.log("err", error)
             )
+    } 
+
+    if (action.type === "IS_LOADED") {
         return [
             ...state,
             action.payload
         ]
-    } 
+    }
+
     if (action.type === "SHOW_TASKS") {
         return [
             ...state,

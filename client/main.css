@@ -1,11 +1,135 @@
 * {
     font-family: sans-serif;
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
-form {
-    margin-bottom: 0;
+/* App styles */
+
+.app {
+
 }
+
+.app__title {
+    text-align: center;
+}
+
+
+/* TaskEditor styles */
+
+.task-editor {
+    width: 350px;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.task-editor::after {
+    display: block;
+    height: 0;
+    width: 0;
+    content: '';
+    clear: both;
+}
+
+.task-editor__input {
+    width: 100%;
+    display: block;
+    border: none;
+    font-size: 15px;
+    padding-left: 5px;
+    outline: none;
+    border-radius: 4px;
+}
+
+.task-editor__text {
+    width: 100%;
+    display: block;
+    border: none;
+    resize: none;
+    font-size: 15px;
+    padding-left: 5px;
+    outline: none;
+}
+
+.task-editor__button {
+    float: right;
+    /* margin-bottom: 10px;
+    margin-right: 10px; */
+    border-radius: 4px;
+    padding: 5px 6px;
+    border: 1px solid black;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.task-editor__input-date {
+    margin-left: 10px;
+    width: 106px;
+    vertical-align: middle;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.task-editor__input-date::-webkit-datetime-edit {
+    margin-left: 5px;
+}
+
+.task-editor__input-date::-webkit-inner-spin-button { display: none; }
+.task-editor__input-date::-webkit-calendar-picker-indicator { margin: 0; padding: 0 3px 0 0; }
+
+.task-editor__input-hours {
+    width: 45px;
+    height: 20px;
+    vertical-align: middle;
+    text-align: center;
+    margin-left: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+.task-editor__input-minutes {
+    width: 45px;
+    height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 15px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.task-editor__input-checkbox {
+    margin-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.task-editor__span {
+    margin-left: 10px;
+}
+
+.task-editor__footer-inputs-buttons {
+    height: 38px;
+}
+
+.task-editor__footer-inputs-buttons::after {
+    display: block;
+    content: '';
+    height: 0;
+    width: 0;
+    clear: both;
+}
+
+.task-editor__footer-inputs-buttons::before {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    content: '';
+}
+
+
+
 
 
 
