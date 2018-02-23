@@ -1,5 +1,5 @@
 .task-editor {
-    width: 300px;
+    width: 350px;
     border: 1px solid black;
 }
 
@@ -35,4 +35,35 @@
     float: right;
     margin-bottom: 10px;
     margin-right: 10px;
+}
+
+.task-editor__input-date {
+    margin-left: 10px;
+    width: 106px;
+}
+
+.task-editor__input-date::-webkit-datetime-edit {
+    margin-left: 5px;
+}
+
+.task-editor__input-date::-webkit-inner-spin-button { display: none; }
+.task-editor__input-date::-webkit-calendar-picker-indicator { margin: 0; padding: 0 3px 0 0; }
+
+.task-editor__input-hours {
+    width: 33px;
+    text-align: center;
+    margin-left: 10px;
+}
+.task-editor__input-minutes {
+    width: 33px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.task-editor__input-checkbox {
+    margin-left: 10px;
+}
+
+.task-editor__span {
+    margin-left: 10px;
 }

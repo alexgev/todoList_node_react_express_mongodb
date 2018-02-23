@@ -1,3 +1,18 @@
 * {
     font-family: sans-serif;
+    box-sizing: border-box;
 }
+
+form {
+    margin-bottom: 0;
+}
+
+
+
+/* body input:focus:required:invalid,
+body textarea:focus:required:invalid {
+  border: 1px solid red; }
+
+body input:required:valid,
+body textarea:required:valid {
+  border: 1px solid green; } */
