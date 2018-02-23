@@ -79,7 +79,7 @@ const TaskEditor = (props) => {
                     <span ref={span => textShowTime = span} className="task-editor__span">show time area:</span>
                     <input type="checkbox" ref={checkbox => checkBoxTime = checkbox} onChange={handleCheckbox} className="task-editor__input-checkbox"/>
                     <input type="text" ref={inputDate => inputHoursTask = inputDate} className="task-editor__input-hours" maxLength="2" pattern="[0,1][0-9]|2[0-3]" placeholder="hour" style={{display: "none"}}/>
-                    <input type="text" ref={inputDate => inputMinutesTask = inputDate} className="task-editor__input-minutes" pattern="[0-5][0-9]" placeholder="min" style={{display: "none"}}/>
+                    <input type="text" ref={inputDate => inputMinutesTask = inputDate} className="task-editor__input-minutes" maxLength="2" pattern="[0-5][0-9]" placeholder="min" style={{display: "none"}}/>
                     <button onClick={addTask} className="task-editor__button">Add Task</button>
                 </div>
             </form>
