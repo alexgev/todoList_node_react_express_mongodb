@@ -16,7 +16,6 @@ const TaskEditor = (props) => {
     const minutePattern = /[0-5][0-9]/;
 
     const addTask = () => {
-
         if (!hourPattern.test(inputHoursTask.value) && inputHoursTask.value) return;
         if (!minutePattern.test(inputMinutesTask.value) && inputMinutesTask.value) return;
 
@@ -43,7 +42,7 @@ const TaskEditor = (props) => {
         }
 
 
-       console.log(inputAddTask.value, textareaAddTask.value, created, finished);
+        console.log(inputAddTask.value, textareaAddTask.value, created, finished);
         props.onTaskAdd(inputAddTask.value, textareaAddTask.value, created, finished);
         inputAddTask.value = '';
         textareaAddTask.value = '';

@@ -23,7 +23,14 @@ app.use(cors());
 // })
 
 app.get('/tasks', (req, res) => {
-    db.findAll().then(
+    db.findAllCurrent().then(
+        result => res.send(result),
+        err => res.send(err)
+    );
+})
+
+app.get('/tasks/finished', (req, res) => {
+    db.findAllFinished().then(
         result => res.send(result),
         err => res.send(err)
     );
@@ -34,6 +41,13 @@ app.post('/tasks', (req, res) => {
         result => res.send(result),
         err => res.send(err)
     );
+})
+
+app.post('/tasks/finished', (req, res) => {
+    db.addFinishedTask(req.body).then(
+        result => res.send(result),
+        err => res.send(err)
+    )
 })
 
 app.delete('/tasks/:id', (req, res) => {

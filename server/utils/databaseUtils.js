@@ -13,12 +13,20 @@ export function setUpConnection(done) {
     });
 }
 
-export function findAll() {
+export function findAllCurrent() {
     return db.collection(config.db.name).find().toArray();
+}
+
+export function findAllFinished() {
+    return db.collection(config.db.finishedTasksName).find().toArray();
 }
 
 export function addTask(task) {
     return db.collection(config.db.name).insert(task);
+}
+
+export function addFinishedTask(task) {
+    return db.collection(config.db.finishedTasksName).insert(task);
 }
 
 export function removeTask(id) {

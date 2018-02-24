@@ -14,6 +14,7 @@
 
 .app__title {
     text-align: center;
+    margin: 10px 0;
 }
 
 
@@ -39,9 +40,10 @@
     display: block;
     border: none;
     font-size: 15px;
-    padding-left: 5px;
+    padding: 4px 5px;
     outline: none;
-    border-radius: 4px;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid black;    
 }
 
 .task-editor__text {
@@ -50,7 +52,7 @@
     border: none;
     resize: none;
     font-size: 15px;
-    padding-left: 5px;
+    padding: 4px 5px;
     outline: none;
 }
 
@@ -63,6 +65,15 @@
     border: 1px solid black;
     vertical-align: middle;
     margin: 5px;
+    cursor: pointer;
+}
+
+.task-editor__button:hover {
+    background-color: #cacaca;
+}
+
+.task-editor__button:focus {
+    background-color: #bdbdbd;
 }
 
 .task-editor__input-date {
@@ -103,6 +114,7 @@
     margin-left: 10px;
     text-align: center;
     vertical-align: middle;
+    cursor: pointer;
 }
 
 .task-editor__span {
@@ -110,6 +122,7 @@
 }
 
 .task-editor__footer-inputs-buttons {
+    border-top: 1px solid black;
     height: 38px;
 }
 
