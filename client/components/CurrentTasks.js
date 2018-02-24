@@ -17,7 +17,7 @@ const CurrentTasks = (props) => {
                 <td>{task.text}</td>
                 <td>{`${task.created.date}.${task.created.month}.${task.created.year} ${task.created.hours}:${task.created.minutes}:${task.created.seconds}`}</td>
                 <td>{`${task.finished.date}.${task.finished.month}.${task.finished.year} ${task.finished.hours}:${task.finished.minutes}`}</td>
-                <td><input onClick={handleCompleteTask} type="checkbox"></input></td>
+                <td><input onClick={handleCompleteTask} type="checkbox" className="current-task-table__complete-input"></input></td>
             </tr>
         )
     })
