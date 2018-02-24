@@ -5,6 +5,7 @@
         "name": "tasks",
         "currentTasksName": "tasks",
         "finishedTasksName": "finishedTasks",
+        "finishedURL": "finished",
         "host": "localhost",
         "port": 27017
     }

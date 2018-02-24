@@ -1,23 +1,17 @@
 export default function currentTasks(state = [], action) {
-    if (action.type === "ADD_TASK") {
-        console.log(action.payload);
-        
-        addCurrentTask(action.payload)
-            .then(
-                response => {
-                    console.log("response add", response);
-                    const taskFromDbsWithId = response.ops[0];
-                    store.dispatch({type: "CURRENT_TASK_IS_LOADED", payload: taskFromDbsWithId});
-                },
-                error => console.log("err", error)
-            )
+    if (action.type === "INITIAL_CURRENT_TASK") {
+        return  action.payload;  
     } 
 
-    if (action.type === "CURRENT_TASK_IS_LOADED") {
+    if (action.type === "ADD_CURRENT_TASK") {
         return [
             ...state,
             action.payload
         ]
+    }
+
+    if (action.type === "DELETE_CURRENT_TASK") {
+        return state.filter(task => task._id != action.payload._id);
     }
 
     return state;

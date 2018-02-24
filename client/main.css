@@ -17,6 +17,10 @@
     margin: 10px 0;
 }
 
+.app__div-with-tables {
+    position: relative;
+}
+
 
 /* TaskEditor styles */
 
@@ -141,7 +145,94 @@
     content: '';
 }
 
+/* CurrentTasks styles */
 
+.current-tasks__table {
+    display: inline-block;
+    width: 50%;
+}
+
+.current-tasks__table > caption {
+    display: inline-block;
+    width: 100%;
+}
+
+.current-tasks__table > tbody {
+    display: block;
+    width: 100%;
+}
+
+.current-tasks__table > tbody > tr {
+    display: block;
+    width: 100%;
+}
+
+.current-tasks__table > tbody > tr::after {
+    display: block;
+    content: '';
+    height: 0;
+    clear: both;
+}
+
+.current-tasks__table > tbody > tr > td, .current-tasks__table > tbody > tr > th {
+    display: block;
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+
+/* div-with-tables styles */
+
+.div-with-tables__border-between-tables {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: black;
+}
+
+
+/* FinishedTasks styles */
+
+.finished-tasks__table {
+    /* position: absolute;
+    width: 50%;
+    right: 0;
+    top: 0; */
+    display: inline-block;
+    width: 50%;
+}
+
+.finished-tasks__table > caption {
+    display: inline-block;
+    width: 100%;
+}
+
+.finished-tasks__table > tbody {
+    display: block;
+    width: 100%;
+}
+
+.finished-tasks__table > tbody > tr {
+    display: block;
+    width: 100%;
+}
+
+.finished-tasks__table > tbody > tr::after {
+    display: block;
+    content: '';
+    height: 0;
+    clear: both;
+}
+
+.finished-tasks__table > tbody > tr > td, .finished-tasks__table > tbody > tr > th {
+    display: block;
+    float: left;
+    width: 25%;
+    text-align: center;
+}
 
 
 

@@ -1,71 +1,63 @@
-import config from '../../etc/config.json';
+import { addCurrentTaskToApi, addFinishedTaskToApi, getCurrentTasksFromApi, getFinishedTasksFromApi, markTaskAsDoneInApi } from '../requestsToApi';
 
 const getCurrentTasks = () => {
-    return new Promise((resolve, reject) => {
-        const xml = new XMLHttpRequest();
-        xml.open("GET", `${config.apiPrefix}/${config.db.name}`);
-        xml.onload = () => {
-            if (xml.status != 200) {
-                let error = new Error(xml.statusText);
-                error.code = xml.status;
-                reject(error);
-            } 
-            resolve(JSON.parse(xml.response));
-        }
-        xml.send();
-    })
+    return dispatch => {
+        getCurrentTasksFromApi().then(
+            result => {
+                dispatch({type: 'INITIAL_CURRENT_TASK', payload: result});
+            },
+            err => console.log(err)
+        )
+    }
 }
 
 const getFinishedTasks = () => {
-    return new Promise((resolve, reject) => {
-        const xml = new XMLHttpRequest();
-        xml.open("GET", `${config.apiPrefix}/${config.db.name}/finished`);
-        xml.onload = () => {
-            if (xml.status != 200) {
-                let error = new Error(xml.statusText);
-                error.code = xml.status;
-                reject(error);
-            } 
-            resolve(JSON.parse(xml.response));
-        }
-        xml.send();
-    })
+    return dispatch => {
+        getFinishedTasksFromApi().then(
+            result => {
+                dispatch({type: 'INITIAL_FINISHED_TASK', payload: result});
+            },
+            err => console.log(err)
+        )
+    }
 }
 
-const addCurrentTask = (data) => {
-    return new Promise((resolve, reject) => {
-        const xml = new XMLHttpRequest();
-        xml.open("POST", `${config.apiPrefix}/${config.db.name}`);
-        xml.setRequestHeader("Content-Type", "application/json");
-        xml.onload = () => {
-            if (xml.status != 200) {
-                let error = new Error(xml.statusText);
-                error.code = xml.status;
-                reject(error);
-            } 
-            resolve(JSON.parse(xml.response));
-        }
-        data = JSON.stringify(data);
-        xml.send(data);
-    })
+
+const addCurrentTask = (task) => {
+    return dispatch => {
+        addCurrentTaskToApi(task).then(
+            result => {
+                const newTaskFromApi = result.ops[0];
+                dispatch({type: 'ADD_CURRENT_TASK', payload: newTaskFromApi});
+            },
+            err => console.log(err)
+        )
+    }
 }
 
-const addFinishedTask = (data) => {
-    return new Promise((resolve, reject) => {
-        const xml = new XMLHttpRequest();
-        xml.open("POST", `${config.apiPrefix}/${config.db.name}/${config.db.finishedTasksName}`);
-        xml.setRequestHeader("Content-Type", "application/json");
-        xml.onload = () => {
-            if (xml.status != 200) {
-                let error = new Error(xml.statusText);
-                error.code = xml.status;
-                reject(error);
-            } 
-            resolve(JSON.parse(xml.response));
-        }
-        data = JSON.stringify(data);
-        xml.send(data);
-    })
+const addFinishedTask = (task) => {
+    return dispatch => {
+        addFinishedTaskToApi(task).then(
+            result => {
+                const newTaskFromApi = result.ops[0];
+                dispatch({type: 'ADD_FINISHED_TASK', payload: newTaskFromApi});
+            },
+            err => console.log(err)
+        )
+    }
 }
 
-export {getCurrentTasks, getFinishedTasks, addCurrentTask, addFinishedTask};
+const markTaskAsDone = (idOfTask) => {
+    return dispatch => {
+        markTaskAsDoneInApi(idOfTask).then(
+            result => {
+                const changedTaskFromApi = result.ops[0];
+                dispatch({type: 'DELETE_CURRENT_TASK', payload: changedTaskFromApi});
+                dispatch({ type: 'ADD_FINISHED_TASK', payload: changedTaskFromApi })
+            },
+            err => console.log(err)
+        )
+    }
+}
+
+export {getCurrentTasks, getFinishedTasks, addCurrentTask, addFinishedTask, markTaskAsDone};

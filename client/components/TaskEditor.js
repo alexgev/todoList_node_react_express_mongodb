@@ -41,8 +41,6 @@ const TaskEditor = (props) => {
             minutes: +inputMinutesTask.value
         }
 
-
-        console.log(inputAddTask.value, textareaAddTask.value, created, finished);
         props.onTaskAdd(inputAddTask.value, textareaAddTask.value, created, finished);
         inputAddTask.value = '';
         textareaAddTask.value = '';

@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import {serverPort} from '../etc/config.json';
+import {serverPort, db as dbConfig} from '../etc/config.json';
 import * as db from './utils/databaseUtils';
 import { dirname } from 'path';
 import path from "path";
@@ -11,16 +11,6 @@ import cors from 'cors';
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-// app.use(bodyParser.urlencoded({extended: true}));
-
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../index.html'));
-// })
-
-// app.post('/', (req, res) => {
-//     console.log(req.body);
-//     res.send(req.body);
-// })
 
 app.get('/tasks', (req, res) => {
     db.findAllCurrent().then(
@@ -29,7 +19,7 @@ app.get('/tasks', (req, res) => {
     );
 })
 
-app.get('/tasks/finished', (req, res) => {
+app.get(`/tasks/${dbConfig.finishedURL}`, (req, res) => {
     db.findAllFinished().then(
         result => res.send(result),
         err => res.send(err)
@@ -43,8 +33,15 @@ app.post('/tasks', (req, res) => {
     );
 })
 
-app.post('/tasks/finished', (req, res) => {
+app.post(`/tasks/${dbConfig.finishedURL}`, (req, res) => {
     db.addFinishedTask(req.body).then(
+        result => res.send(result),
+        err => res.send(err)
+    )
+})
+
+app.put('/tasks/:id', (req, res) => {
+    db.completeTask(req.params.id).then(
         result => res.send(result),
         err => res.send(err)
     )

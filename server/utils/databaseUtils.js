@@ -33,6 +33,14 @@ export function removeTask(id) {
     return db.collection(config.db.name).deleteOne({_id: ObjectID(id)});
 }
 
+export function completeTask(id) {
+    return db.collection(config.db.name).findOne({ _id: ObjectID(id) }).then(
+        result => db.collection(config.db.finishedTasksName).insert(result)
+    ).then(
+        db.collection(config.db.name).deleteOne({ _id: ObjectID(id) })
+    ) 
+}
+
 export function getDb() {
     return db;
 }
