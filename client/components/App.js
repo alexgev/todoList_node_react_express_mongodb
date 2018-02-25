@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import TaskEditor from './TaskEditor';
 import CurrentTasks from './CurrentTasks';
 import FinishedTasks from './FinishedTasks';
+import Clock from './Clock';
 
 import {getCurrentTasks, getFinishedTasks, addCurrentTask, addFinishedTask} from '../actions/tasks';
 
@@ -18,6 +19,7 @@ const App = (props) => {
         <div className="app">
             <h2 className="app__title">Todo Application</h2>
             <TaskEditor onTaskAdd={handleTaskAdd} />
+            <Clock />
             <div className="app__div-with-tables">
                 <CurrentTasks />
                 <div className="div-with-tables__border-between-tables">
