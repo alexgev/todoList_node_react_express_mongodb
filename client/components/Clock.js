@@ -12,7 +12,7 @@ const Clock = (props) => {
     
 
     return (
-        <h3>{props.time}</h3>
+        <h3 className="header__clock">{props.time}</h3>
     )
 }
 

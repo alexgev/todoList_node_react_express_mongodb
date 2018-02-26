@@ -17,9 +17,11 @@ const App = (props) => {
     }
     return (
         <div className="app">
-            <h2 className="app__title">Todo Application</h2>
-            <TaskEditor onTaskAdd={handleTaskAdd} />
-            <Clock />
+            <header className="header">
+                <h2 className="app__title">Todo Application</h2>
+                <TaskEditor onTaskAdd={handleTaskAdd} />
+                <Clock />
+            </header>
             <div className="app__div-with-tables">
                 <CurrentTasks />
                 <div className="div-with-tables__border-between-tables">
