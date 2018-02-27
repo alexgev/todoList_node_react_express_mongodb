@@ -6,7 +6,7 @@ const Clock = (props) => {
     const date = new Date();
     
     const timerId = setInterval(() => {
-        props.onChangeTime(date.toLocaleTimeString());
+        // props.onChangeTime(date.toLocaleTimeString());
         clearInterval(timerId);
     }, 1000);
     

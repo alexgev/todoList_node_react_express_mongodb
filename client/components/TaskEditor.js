@@ -24,22 +24,27 @@ const TaskEditor = (props) => {
         }
 
         const dateObj = new Date();
-        const created = {
-            year: dateObj.getFullYear(),
-            month: dateObj.getMonth() + 1,
-            date: dateObj.getDate(),
-            hours: dateObj.getHours(),
-            minutes: dateObj.getMinutes(),
-            seconds: dateObj.getSeconds()
-        };
+        // const created = {
+        //     year: dateObj.getFullYear(),
+        //     month: dateObj.getMonth() + 1,
+        //     date: dateObj.getDate(),
+        //     hours: dateObj.getHours(),
+        //     minutes: dateObj.getMinutes(),
+        //     seconds: dateObj.getSeconds()
+        // };
         const splitFinishDate = inputDateTask.value.split("-");
-        const finished = {
-            year: +splitFinishDate[0],
-            month: +splitFinishDate[1],
-            date: +splitFinishDate[2],
-            hours: +inputHoursTask.value,
-            minutes: +inputMinutesTask.value
-        }
+
+        const finished = +new Date(+splitFinishDate[0], +splitFinishDate[1] - 1, +splitFinishDate[2], +inputHoursTask.value, +inputMinutesTask.value);
+        const created = Date.now();
+
+
+        // const finished = {
+        //     year: +splitFinishDate[0],
+        //     month: +splitFinishDate[1],
+        //     date: +splitFinishDate[2],
+        //     hours: +inputHoursTask.value,
+        //     minutes: +inputMinutesTask.value
+        // }
 
         props.onTaskAdd(inputAddTask.value, textareaAddTask.value, created, finished);
         inputAddTask.value = '';

@@ -8,8 +8,8 @@ const FinishedTasks = (props) => {
             <tr key={task._id}>
                 <td>{task.title}</td>
                 <td>{task.text}</td>
-                <td>{`${task.created.date}.${task.created.month}.${task.created.year} ${task.created.hours}:${task.created.minutes}:${task.created.seconds}`}</td>
-                <td>{`${task.finished.date}.${task.finished.month}.${task.finished.year} ${task.finished.hours}:${task.finished.minutes}`}</td>
+                <td>{new Date(task.created).toLocaleString()}</td>
+                <td>{new Date(task.finished).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'})}</td>
             </tr>
         )
     })

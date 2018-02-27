@@ -60,4 +60,8 @@ const markTaskAsDone = (idOfTask) => {
     }
 }
 
+// const timeToFinish = (time, idOfTask) => {
+
+// }
+
 export {getCurrentTasks, getFinishedTasks, addCurrentTask, addFinishedTask, markTaskAsDone};

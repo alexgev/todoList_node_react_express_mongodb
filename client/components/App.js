@@ -13,6 +13,10 @@ import {getCurrentTasks, getFinishedTasks, addCurrentTask, addFinishedTask} from
 const App = (props) => {
 
     const handleTaskAdd = (dataTitle, dataText, dataCreated, dataFinished) => {
+        if ((Date.now() > dataFinished)) {
+            props.onAddFinishedTask({title: dataTitle, text: dataText, created: dataCreated, finished: dataFinished});
+            return;
+        }
         props.onAddTask({title: dataTitle, text: dataText, created: dataCreated, finished: dataFinished});
     }
     return (
