@@ -72,6 +72,7 @@ const markTaskAsDoneInApi = (idOfTask) => {
     return new Promise((resolve, reject) => {
         const xml = new XMLHttpRequest();
         xml.open("PUT", `${config.apiPrefix}/${config.db.name}/${idOfTask}`);
+        xml.setRequestHeader('Content-Type', "application/json");
         xml.onload = () => {
             if (xml.status != 200) {
                 let error = new Error(xml.statusText);
@@ -80,7 +81,8 @@ const markTaskAsDoneInApi = (idOfTask) => {
             } 
             resolve(JSON.parse(xml.response));
         }
-        xml.send();
+        let completedTime = Date.now();
+        xml.send(JSON.stringify({completedTime: completedTime}));
     })
 }
 

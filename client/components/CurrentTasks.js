@@ -42,21 +42,21 @@ const CurrentTasks = (props) => {
         } else {
             timeToFinishString = `${valueOfMinutes}m`;
         }
-        let createdDate = new Date(task.start).toLocaleString().split(", ");
-        let finishDate = new Date(task.due).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
+        let startDate = new Date(task.start).toLocaleString().split(", ");
+        let dueDate = new Date(task.due).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
         return (
             <tr key={task._id}>
                 <td>{task.title}</td>
                 <td>{task.text}</td>
                 <td>
-                    {createdDate[0]}
+                    {startDate[0]}
                     <br />
-                    {createdDate[1]}
+                    {startDate[1]}
                 </td>
                 <td>
-                    {finishDate[0]}
+                    {dueDate[0]}
                     <br />
-                    {finishDate[1]}
+                    {dueDate[1]}
                 </td>
                 <td>{timeToFinishString ? timeToFinishString : null}</td>
                 <td><input onClick={handleCompleteTask.bind(null, task)} type="checkbox" className="current-task-table__complete-input"></input></td>

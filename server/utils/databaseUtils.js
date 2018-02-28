@@ -33,12 +33,26 @@ export function removeTask(id) {
     return db.collection(config.db.name).deleteOne({_id: ObjectID(id)});
 }
 
-export function completeTask(id) {
-    return db.collection(config.db.name).findOne({ _id: ObjectID(id) }).then(
-        result => db.collection(config.db.finishedTasksName).insert(result)
+export function completeTask(id, finishedTime) {
+    return db.collection(config.db.name).update({ _id: ObjectID(id) }, {$set: finishedTime}).then(
+        result => db.collection(config.db.name).findOne({ _id: ObjectID(id) }),
+        err => console.log(err)
     ).then(
-        db.collection(config.db.name).deleteOne({ _id: ObjectID(id) })
-    ) 
+        result => db.collection(config.db.finishedTasksName).insert(result),
+        err => console.log(err)
+    ).then(
+        result => db.collection(config.db.name).deleteOne({ _id: ObjectID(id) }),
+        err => console.log(err)
+    ).then(
+        result => db.collection(config.db.finishedTasksName).findOne({ _id: ObjectID(id) }),
+        err => console.log(err)
+    )
+    
+    // db.collection(config.db.name).findOne({ _id: ObjectID(id) }).then(
+    //     result => db.collection(config.db.finishedTasksName).insert(result)
+    // ).then(
+    //     db.collection(config.db.name).deleteOne({ _id: ObjectID(id) })
+    // ) 
 }
 
 export function getDb() {

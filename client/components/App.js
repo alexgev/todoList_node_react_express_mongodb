@@ -22,7 +22,7 @@ const App = (props) => {
     return (
         <div className="app">
             <header className="header">
-                <h2 className="app__title">Todo Application</h2>
+                <h2 className="app__title">ToDo Application</h2>
                 <TaskEditor onTaskAdd={handleTaskAdd} />
                 <Clock />
             </header>

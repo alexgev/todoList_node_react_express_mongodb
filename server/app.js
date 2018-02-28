@@ -41,7 +41,8 @@ app.post(`/tasks/${dbConfig.finishedURL}`, (req, res) => {
 })
 
 app.put('/tasks/:id', (req, res) => {
-    db.completeTask(req.params.id).then(
+    console.log(req.body);
+    db.completeTask(req.params.id, req.body).then(
         result => res.send(result),
         err => res.send(err)
     )

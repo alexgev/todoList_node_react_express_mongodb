@@ -55,9 +55,9 @@ const markTaskAsDone = (idOfTask) => {
     return dispatch => {
         markTaskAsDoneInApi(idOfTask).then(
             result => {
-                const changedTaskFromApi = result.ops[0];
-                dispatch({type: 'DELETE_CURRENT_TASK', payload: changedTaskFromApi});
-                dispatch({ type: 'ADD_FINISHED_TASK', payload: changedTaskFromApi })
+                console.log(result);
+                dispatch({ type: 'DELETE_CURRENT_TASK', payload: result });
+                dispatch({ type: 'ADD_FINISHED_TASK', payload: result })
             },
             err => console.log(err)
         )
