@@ -18,7 +18,7 @@ const CurrentTasks = (props) => {
         timerId = setInterval(() => {
             for (let i = 0; i < currentTasks.length; i++) {
                 if (Date.now() > currentTasks[i].due) {
-                    props.onCompleteTask(currentTasks[i]._id);
+                    props.onCompleteTask(currentTasks[i]._id, false);
                 } else {
                     arrOfTime.push(currentTasks[i].due - Date.now());
 
@@ -91,8 +91,8 @@ export default connect(
         stateOfTimeToFinish: state.timeToFinish
     }),
     dispatch => ({
-        onCompleteTask: (idOfTask) => {
-            dispatch(markTaskAsDone(idOfTask));
+        onCompleteTask: (idOfTask, completed = true) => {
+            dispatch(markTaskAsDone(idOfTask, completed));
         },
         timeToFinish: (timeToFinish) => {
             dispatch({type: "TIME_TO_FINISH", payload: timeToFinish})

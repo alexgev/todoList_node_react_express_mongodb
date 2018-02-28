@@ -68,7 +68,7 @@ const addFinishedTaskToApi = (data) => {
     })
 }
 
-const markTaskAsDoneInApi = (idOfTask) => {
+const markTaskAsDoneInApi = (idOfTask, completed) => {
     return new Promise((resolve, reject) => {
         const xml = new XMLHttpRequest();
         xml.open("PUT", `${config.apiPrefix}/${config.db.name}/${idOfTask}`);
@@ -81,7 +81,8 @@ const markTaskAsDoneInApi = (idOfTask) => {
             } 
             resolve(JSON.parse(xml.response));
         }
-        let completedTime = Date.now();
+        let completedTime = 0;
+        (completed === true) ? completedTime = Date.now() : null;
         xml.send(JSON.stringify({completedTime: completedTime}));
     })
 }

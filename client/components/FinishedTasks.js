@@ -6,7 +6,23 @@ const FinishedTasks = (props) => {
     const tableRowsWithFinishedTasks = props.finishedTasks.map((task) => {
         let startDate = new Date(task.start).toLocaleString().split(", ");
         let dueDate = new Date(task.due).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
-        let completedDate = new Date(task.completedTime).toLocaleString().split(", ");
+        const completedString = () => {
+            if (task.completedTime === 0) {
+                return (
+                    <td>
+                        {'Not completed'}
+                    </td>
+                )
+            }
+            let completedDate = new Date(task.completedTime).toLocaleString().split(", ");
+            return (
+                <td>
+                    {completedDate[0]}
+                    <br />
+                    {completedDate[1]}
+                </td>
+            )
+        }
         return (
             <tr key={task._id}>
                 <td>{task.title}</td>
@@ -21,11 +37,9 @@ const FinishedTasks = (props) => {
                     <br />
                     {dueDate[1]}
                 </td>
-                <td>
-                    {completedDate[0]}
-                    <br />
-                    {completedDate[1]}
-                </td>
+                {
+                    completedString()
+                }
             </tr>
         )
     })

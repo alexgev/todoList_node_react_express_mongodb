@@ -51,9 +51,9 @@ const addFinishedTask = (task) => {
     }
 }
 
-const markTaskAsDone = (idOfTask) => {
+const markTaskAsDone = (idOfTask, completed) => {
     return dispatch => {
-        markTaskAsDoneInApi(idOfTask).then(
+        markTaskAsDoneInApi(idOfTask, completed).then(
             result => {
                 console.log(result);
                 dispatch({ type: 'DELETE_CURRENT_TASK', payload: result });
