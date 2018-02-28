@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 const FinishedTasks = (props) => {
     
     const tableRowsWithFinishedTasks = props.finishedTasks.map((task) => {
-        let createdDate = new Date(task.created).toLocaleString().split(", ");
-        let finishDate = new Date(task.finished).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
+        let createdDate = new Date(task.start).toLocaleString().split(", ");
+        let finishDate = new Date(task.due).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
         return (
             <tr key={task._id}>
                 <td>{task.title}</td>

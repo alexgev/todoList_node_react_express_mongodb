@@ -14,10 +14,10 @@ const App = (props) => {
 
     const handleTaskAdd = (dataTitle, dataText, dataCreated, dataFinished) => {
         if ((Date.now() > dataFinished)) {
-            props.onAddFinishedTask({title: dataTitle, text: dataText, created: dataCreated, finished: dataFinished});
+            props.onAddFinishedTask({title: dataTitle, text: dataText, start: dataCreated, due: dataFinished});
             return;
         }
-        props.onAddTask({title: dataTitle, text: dataText, created: dataCreated, finished: dataFinished});
+        props.onAddTask({title: dataTitle, text: dataText, start: dataCreated, due: dataFinished});
     }
     return (
         <div className="app">

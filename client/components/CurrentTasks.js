@@ -17,11 +17,11 @@ const CurrentTasks = (props) => {
 
         timerId = setInterval(() => {
             for (let i = 0; i < currentTasks.length; i++) {
-                if (Date.now() > currentTasks[i].finished) {
+                if (Date.now() > currentTasks[i].due) {
                     // console.log('finished!!!!!!!!!!!!');
                     props.onCompleteTask(currentTasks[i]._id);
                 } else {
-                    arrOfTime.push(currentTasks[i].finished - Date.now());
+                    arrOfTime.push(currentTasks[i].due - Date.now());
 
                 }
             }
@@ -43,8 +43,8 @@ const CurrentTasks = (props) => {
         } else {
             timeToFinishString = `${valueOfMinutes}m`;
         }
-        let createdDate = new Date(task.created).toLocaleString().split(", ");
-        let finishDate = new Date(task.finished).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
+        let createdDate = new Date(task.start).toLocaleString().split(", ");
+        let finishDate = new Date(task.due).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
         return (
             <tr key={task._id}>
                 <td>{task.title}</td>
