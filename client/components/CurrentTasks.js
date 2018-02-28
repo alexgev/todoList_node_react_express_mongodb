@@ -18,7 +18,6 @@ const CurrentTasks = (props) => {
         timerId = setInterval(() => {
             for (let i = 0; i < currentTasks.length; i++) {
                 if (Date.now() > currentTasks[i].due) {
-                    // console.log('finished!!!!!!!!!!!!');
                     props.onCompleteTask(currentTasks[i]._id);
                 } else {
                     arrOfTime.push(currentTasks[i].due - Date.now());
