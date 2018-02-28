@@ -4,12 +4,22 @@ import { connect } from 'react-redux';
 const FinishedTasks = (props) => {
     
     const tableRowsWithFinishedTasks = props.finishedTasks.map((task) => {
+        let createdDate = new Date(task.created).toLocaleString().split(", ");
+        let finishDate = new Date(task.finished).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
         return (
             <tr key={task._id}>
                 <td>{task.title}</td>
                 <td>{task.text}</td>
-                <td>{new Date(task.created).toLocaleString()}</td>
-                <td>{new Date(task.finished).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'})}</td>
+                <td>
+                    {createdDate[0]}
+                    <br />
+                    {createdDate[1]}
+                </td>
+                <td>
+                    {finishDate[0]}
+                    <br />
+                    {finishDate[1]}
+                </td>
             </tr>
         )
     })
@@ -21,8 +31,8 @@ const FinishedTasks = (props) => {
                 <tr>
                     <th>Title</th>
                     <th>Text</th>
-                    <th>Created</th>
-                    <th>Finished</th>
+                    <th>Start</th>
+                    <th>Due</th>
                 </tr>
                 {
                     tableRowsWithFinishedTasks.reverse()

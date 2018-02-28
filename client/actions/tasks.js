@@ -5,6 +5,9 @@ const getCurrentTasks = () => {
         getCurrentTasksFromApi().then(
             result => {
                 dispatch({type: 'INITIAL_CURRENT_TASK', payload: result});
+                dispatch({type: 'TIME_TO_FINISH', payload: result.map((task) => {
+                    return task.finished - Date.now();
+                })});
             },
             err => console.log(err)
         )
@@ -29,6 +32,7 @@ const addCurrentTask = (task) => {
             result => {
                 const newTaskFromApi = result.ops[0];
                 dispatch({type: 'ADD_CURRENT_TASK', payload: newTaskFromApi});
+                dispatch({ type: 'NEW_TASK_TIME_TO_FINISH', payload: newTaskFromApi.finished - Date.now() });
             },
             err => console.log(err)
         )

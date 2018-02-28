@@ -3,89 +3,18 @@ import { connect } from 'react-redux';
 import { markTaskAsDone } from '../actions/tasks';
 
 let timerId = 0;
-let initialComponent = true;
 
 const CurrentTasks = (props) => {
-
-    // const dispatchToChangeTimeToFinished = (currentTasks) => {
-    //     let arrOfTime = [];
-    //     let arrOfIds = [];
-    //     for (let i = 0; i < props.currentTasks.length; i++) {
-    //         if (Date.now() > props.currentTasks[i].finished) {
-    //             // console.log('finished!!!!!!!!!!!!');
-    //             props.onCompleteTask(props.currentTasks[i]._id);
-    //         } else {
-    //             arrOfTime.push(props.currentTasks[i].finished - Date.now());
-    //             arrOfIds.push(props.currentTasks[i]._id);
-    //             // console.log(currentTasks);
-    //             // clearInterval(timerId);                
-    //             // console.log('Not finished!!!!!!!!!!!!!');
-    //         }
-    //     }
-    //     props.timeToFinish(arrOfTime, arrOfIds);
-    //     arrOfTime = [];
-    //     arrOfIds = [];
-    //     initialComponent = false;
-    // }
-
-    // if (props.currentTasks.length > 0 && initialComponent === true) {
-    //     dispatchToChangeTimeToFinished(props.currentTasks);
-    //     initialComponent = false;
-    //     console.log('init');
-    // } else {
-    //    console.log('not init');
-    // }
 
     const handleCompleteTask = (task) => {
         console.log(task);
         props.onCompleteTask(task._id);
     }
 
-    // if (initialComponent == true) {
-    //     console.log(props.currentTasks);
-    //     let arrOfTime = [];
-    //     let arrOfIds = [];
-    //     for (let i = 0; i < props.currentTasks.length; i++) {
-    //         if (Date.now() > props.currentTasks[i].finished) {
-    //             // console.log('finished!!!!!!!!!!!!');
-    //             props.onCompleteTask(props.currentTasks[i]._id);
-    //         } else {
-    //             arrOfTime.push(props.currentTasks[i].finished - Date.now());
-    //             arrOfIds.push(props.currentTasks[i]._id);
-    //             // console.log(currentTasks);
-    //             // clearInterval(timerId);                
-    //             // console.log('Not finished!!!!!!!!!!!!!');
-    //         }
-    //     }
-    //     props.timeToFinish(arrOfTime, arrOfIds);
-    //     arrOfTime = [];
-    //     arrOfIds = [];
-    //     initialComponent = false;
-    // }
-
     const calcTimeToFinish = (currentTasks) => {
-        // console.log('timeToFinish', currentTasks);
         clearInterval(timerId);
         let arrOfTime = [];
-        let arrOfIds = [];
-        // if (initialComponent === true) {
-        //     for (let i = 0; i < props.currentTasks.length; i++) {
-        //         if (Date.now() > props.currentTasks[i].finished) {
-        //             // console.log('finished!!!!!!!!!!!!');
-        //             props.onCompleteTask(props.currentTasks[i]._id);
-        //         } else {
-        //             arrOfTime.push(props.currentTasks[i].finished - Date.now());
-        //             arrOfIds.push(props.currentTasks[i]._id);
-        //             // console.log(currentTasks);
-        //             // clearInterval(timerId);                
-        //             // console.log('Not finished!!!!!!!!!!!!!');
-        //         }
-        //     }
-        //     props.timeToFinish(arrOfTime, arrOfIds);
-        //     arrOfTime = [];
-        //     arrOfIds = [];
-        //     initialComponent = false;
-        // }
+
         timerId = setInterval(() => {
             for (let i = 0; i < currentTasks.length; i++) {
                 if (Date.now() > currentTasks[i].finished) {
@@ -93,29 +22,44 @@ const CurrentTasks = (props) => {
                     props.onCompleteTask(currentTasks[i]._id);
                 } else {
                     arrOfTime.push(currentTasks[i].finished - Date.now());
-                    arrOfIds.push(currentTasks[i]._id);
-                    // console.log(currentTasks);
-                    // clearInterval(timerId);                
-                    // console.log('Not finished!!!!!!!!!!!!!');
+
                 }
             }
-            props.timeToFinish(arrOfTime, arrOfIds);
+            props.timeToFinish(arrOfTime);
             arrOfTime = [];
-            arrOfIds = [];
-        }, 5000);
+        }, 3000);
         
     }
 
     calcTimeToFinish(props.currentTasks);
 
     const tableRowsWithCurrentTasks = props.currentTasks.map((task, i) => {
-        // console.log(props.stateOfTimeToFinish);
+        let valueOfMinutes = Math.ceil(props.stateOfTimeToFinish[i] / 1000 / 60);
+        let timeToFinishString = '';
+        if (Math.floor(valueOfMinutes / 60) >= 24) {
+            timeToFinishString = `${Math.floor(valueOfMinutes / 60 / 24)}d${Math.floor(valueOfMinutes / 60 % 24)}h${valueOfMinutes % 60}m`;
+        } else if (valueOfMinutes >= 60) {
+            timeToFinishString = `${Math.floor(valueOfMinutes / 60)}h${valueOfMinutes % 60}m`;
+        } else {
+            timeToFinishString = `${valueOfMinutes}m`;
+        }
+        let createdDate = new Date(task.created).toLocaleString().split(", ");
+        let finishDate = new Date(task.finished).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
         return (
             <tr key={task._id}>
                 <td>{task.title}</td>
-                <td>{task.text}{props.stateOfTimeToFinish.timeToFinish ? Math.floor(props.stateOfTimeToFinish.timeToFinish[i] / 1000) : null}</td>
-                <td>{new Date(task.created).toLocaleString()}</td>
-                <td>{new Date(task.finished).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'})}</td>
+                <td>{task.text}</td>
+                <td>
+                    {createdDate[0]}
+                    <br />
+                    {createdDate[1]}
+                </td>
+                <td>
+                    {finishDate[0]}
+                    <br />
+                    {finishDate[1]}
+                </td>
+                <td>{timeToFinishString ? timeToFinishString : null}</td>
                 <td><input onClick={handleCompleteTask.bind(null, task)} type="checkbox" className="current-task-table__complete-input"></input></td>
             </tr>
         )
@@ -129,9 +73,10 @@ const CurrentTasks = (props) => {
                 <tr>
                     <th>Title</th>
                     <th>Text</th>
-                    <th>Created</th>
-                    <th>Finished</th>
-                    <th>Complete</th>
+                    <th>Start</th>
+                    <th>Due</th>
+                    <th>Est.</th>
+                    <th>Comp.</th>
                 </tr>
                 {
                     tableRowsWithCurrentTasks.reverse()
@@ -150,8 +95,8 @@ export default connect(
         onCompleteTask: (idOfTask) => {
             dispatch(markTaskAsDone(idOfTask));
         },
-        timeToFinish: (timeToFinish, idOfTask) => {
-            dispatch({type: "TIME_TO_FINISH", payload: {timeToFinish, idOfTask}})
+        timeToFinish: (timeToFinish) => {
+            dispatch({type: "TIME_TO_FINISH", payload: timeToFinish})
         }
     })
 )(CurrentTasks);
