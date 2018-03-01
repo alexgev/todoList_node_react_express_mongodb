@@ -3,7 +3,7 @@ import config from '../../etc/config.json';
 const getCurrentTasksFromApi = () => {
     return new Promise((resolve, reject) => {
         const xml = new XMLHttpRequest();
-        xml.open("GET", `${config.apiPrefix}/${config.db.name}`);
+        xml.open("GET", `${config.apiPrefix}/curtasks`);
         xml.onload = () => {
             if (xml.status != 200) {
                 let error = new Error(xml.statusText);
@@ -19,7 +19,7 @@ const getCurrentTasksFromApi = () => {
 const getFinishedTasksFromApi = () => {
     return new Promise((resolve, reject) => {
         const xml = new XMLHttpRequest();
-        xml.open("GET", `${config.apiPrefix}/${config.db.name}/${config.db.finishedURL}`);
+        xml.open("GET", `${config.apiPrefix}/fintasks`);
         xml.onload = () => {
             if (xml.status != 200) {
                 let error = new Error(xml.statusText);

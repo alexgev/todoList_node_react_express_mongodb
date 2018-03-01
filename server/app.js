@@ -12,14 +12,21 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/tasks', (req, res) => {
+app.get('/curtasks', (req, res) => {
     db.findAllCurrent().then(
         result => res.send(result),
         err => res.send(err)
     );
 })
 
-app.get(`/tasks/${dbConfig.finishedURL}`, (req, res) => {
+app.get('/curtasks/:id', (req, res) => {
+    db.findOneCurrent(req.params.id).then(
+        result => res.send(result),
+        err => res.send(err)
+    )
+})
+
+app.get(`/fintasks`, (req, res) => {
     db.findAllFinished().then(
         result => res.send(result),
         err => res.send(err)
@@ -41,7 +48,6 @@ app.post(`/tasks/${dbConfig.finishedURL}`, (req, res) => {
 })
 
 app.put('/tasks/:id', (req, res) => {
-    console.log(req.body);
     db.completeTask(req.params.id, req.body).then(
         result => res.send(result),
         err => res.send(err)

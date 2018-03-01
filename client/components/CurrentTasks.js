@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { markTaskAsDone } from '../actions/tasks';
+import { withRouter } from 'react-router-dom';
 
 let timerId = 0;
 
@@ -9,6 +10,11 @@ const CurrentTasks = (props) => {
     const handleCompleteTask = (task) => {
         console.log(task);
         props.onCompleteTask(task._id);
+    }
+
+    const handleOnClickTr = (task, event) => {
+        if (event.target.type === 'checkbox') return;
+        props.history.push(`/${task._id}`);
     }
 
     const calcTimeToFinish = (currentTasks) => {
@@ -45,7 +51,7 @@ const CurrentTasks = (props) => {
         let startDate = new Date(task.start).toLocaleString().split(", ");
         let dueDate = new Date(task.due).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute:'2-digit'}).split(', ');
         return (
-            <tr key={task._id}>
+            <tr key={task._id} onClick={handleOnClickTr.bind(null, task)}>
                 <td>{task.title}</td>
                 <td>{task.text}</td>
                 <td>
@@ -85,7 +91,7 @@ const CurrentTasks = (props) => {
     )
 }
 
-export default connect(
+export default withRouter(connect(
     state => ({
         currentTasks: state.currentTasks,
         stateOfTimeToFinish: state.timeToFinish
@@ -98,4 +104,4 @@ export default connect(
             dispatch({type: "TIME_TO_FINISH", payload: timeToFinish})
         }
     })
-)(CurrentTasks);
+)(CurrentTasks));

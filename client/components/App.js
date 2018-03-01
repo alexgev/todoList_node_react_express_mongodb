@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { withRouter } from 'react-router-dom';
 
 import TaskEditor from './TaskEditor';
 import CurrentTasks from './CurrentTasks';
@@ -36,7 +36,7 @@ const App = (props) => {
     )
 }
 
-export default connect(
+export default withRouter(connect(
     state => ({
         currentTasks: state.currentTasks,
         finishedTasks: state.finishedTasks
@@ -53,4 +53,4 @@ export default connect(
             }
         }
     }
-)(App);
+)(App));

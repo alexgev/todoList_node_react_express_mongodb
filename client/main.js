@@ -4,10 +4,12 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 
 import App from './components/App';
 import './main.css';
+import Task from './components/Task';
 
 import {getCurrentTasks, addCurrentTask, getFinishedTasks, addFinishedTask} from './actions/tasks';
 import reducer from './reducers';
@@ -23,7 +25,12 @@ store.subscribe(() => {
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Router>
+            <div>
+                <Route path="/" component={App} />
+                <Route path="/:id" component={Task} />
+            </div>
+        </Router>
     </Provider>,
     document.getElementById('app')
 );

@@ -17,6 +17,10 @@ export function findAllCurrent() {
     return db.collection(config.db.name).find().toArray();
 }
 
+export function findOneCurrent(id) {
+    return db.collection(config.db.name).findOne({_id: ObjectID(id)});
+}
+
 export function findAllFinished() {
     return db.collection(config.db.finishedTasksName).find().toArray();
 }

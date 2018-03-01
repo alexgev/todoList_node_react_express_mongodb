@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 const FinishedTasks = (props) => {
+
+    const handleOnClickTr = (task, event) => {
+        props.history.push(`/${task._id}`);
+    }
     
     const tableRowsWithFinishedTasks = props.finishedTasks.map((task) => {
         let startDate = new Date(task.start).toLocaleString().split(", ");
@@ -24,7 +29,7 @@ const FinishedTasks = (props) => {
             )
         }
         return (
-            <tr key={task._id}>
+            <tr key={task._id} onClick={handleOnClickTr.bind(null, task)} className={(task.completedTime === 0) ? 'not-completed-task' : 'completed-task'}>
                 <td>{task.title}</td>
                 <td>{task.text}</td>
                 <td>
@@ -63,9 +68,9 @@ const FinishedTasks = (props) => {
     )
 }
 
-export default connect(
+export default withRouter(connect(
     state => ({
         finishedTasks: state.finishedTasks
     }),
     dispatch => ({})
-)(FinishedTasks);
+)(FinishedTasks));

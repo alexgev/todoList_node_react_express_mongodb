@@ -6,15 +6,27 @@
     border: none;
 }
 
+input[type=checkbox] {
+    cursor: pointer;
+}
+
 /* App styles */
 
-.app {
-
+#app {
+    position: relative;
 }
 
 .app__title {
     text-align: center;
     padding: 10px 0;
+}
+
+.app__menu {
+    padding: 10px;
+}
+
+.app__menu a {
+    margin-left: 10px;
 }
 
 .app__div-with-tables {
@@ -174,6 +186,16 @@
     border-bottom: 1px solid black;
 }
 
+.current-tasks__table tr:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+}
+
+.current-tasks__table tr:first-child {
+    background-color: white;
+    cursor: default;
+}
+
 .current-tasks__table caption {
     border-bottom: 1px solid black;
     border-top: 1px solid black;
@@ -229,6 +251,16 @@
     border-bottom: 1px solid black;
 }
 
+.finished-tasks__table tr:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+}
+
+.finished-tasks__table tr:first-child {
+    background-color: white;
+    cursor: default;
+}
+
 .finished-tasks__table caption {
     border-bottom: 1px solid black;
     border-top: 1px solid black;
@@ -247,6 +279,95 @@
     white-space: nowrap;
 }
 
+.not-completed-task {
+    color: red;
+}
+
+.completed-task {
+    color: green;
+}
+
+/* Task Page styles */
+
+.task-page {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: #00000080;
+    /* top: 50%;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -200px; */
+}
+
+.task-page__wrapper {
+    width: 645px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -323.5px;
+    margin-top: -200px;
+    background-color: #ffffff;
+}
+
+.task-page__title {
+    word-wrap: break-word;
+    overflow-y: auto;
+    margin-right: 20px;
+    height: 37.2px;
+    padding: 5px 15px 5px 5px;
+}
+
+.task-page__text {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 321px;
+    width: 645px;
+    padding: 5px 10px;
+    word-wrap: break-word;
+    overflow-y: auto;
+}
+
+.task-page__footer {
+    padding: 5px 0;
+}
+
+.task-page__start, .task-page__due, .task-page__completed {
+    display: inline-block;
+    vertical-align: middle;
+    width: 33.3%;
+    text-align: center;
+    padding: 5px;
+}
+
+/* .task-page__start {
+    text-align: left;
+}
+
+.task-page__due {
+    text-align: center;
+}
+
+.task-page__completed {
+    text-align: right;
+} */
+
+.task-page__close {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.task-page__close:hover {
+    cursor: pointer;
+}
 
 /* body input:focus:required:invalid,
 body textarea:focus:required:invalid {
