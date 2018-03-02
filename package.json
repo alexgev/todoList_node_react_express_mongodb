@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "BABEL_ENV=react webpack",
+    "start": "BABEL_ENV=react webpack --env production",
     "server": "BABEL_ENV=react webpack-dev-server --content-base ./public --inline --hot --port 8081",
     "server-app": "babel-node server/app.js"
   },
@@ -32,7 +32,9 @@
     "css-loader": "^0.28.9",
     "prop-types": "^15.6.0",
     "style-loader": "^0.20.1",
+    "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack-dev-server": "^2.11.1",
+    "webpack-merge": "^4.1.2"
   }
 }
