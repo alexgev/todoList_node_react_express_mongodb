@@ -9,8 +9,10 @@ import cors from 'cors';
 
 
 const app = express();
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json());
 app.use(cors());
+
 
 app.get('/curtasks', (req, res) => {
     db.findAllCurrent().then(
